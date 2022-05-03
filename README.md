@@ -19,11 +19,14 @@ $ pip install -r requirements.txt
 ```
 OXTRADE_ADDRESS=
 OXTRADE_PRIVATE=
+OXTRADE_SUCCESS=
 ```
 
 Wherein the `OXTRADE_ADDRESS` is the wallet address that will perform transactions and the `OXTRADE_PRIVATE` is the exported private key. To know on how to export a wallet's private key through Metamask, kindly check this [link](https://metamask.zendesk.com/hc/en-us/articles/360015289632-How-to-Export-an-Account-Private-Key).
 
 **Warning**: __EXPORTING YOUR ACCOUNT COULD BE RISKY AS IT DISPLAYS YOUR PRIVATE KEY IN CLEAR TEXT__. Therefore, you should make sure no one else sees, or otherwise is able to capture a screenshot while you retrieve your private key, to avoid possible loss of your Ether/tokens. Many phishing campaigns would ask for your private key, which would help them gain access to your accounts. You should never share your private key with anyone.
+
+For `OXTRADE_SUCCESS`, it is an URL wherein Oxtrade can pass data (e.g, `price`, `amount`, `value`) after the transaction is put to the network. It can be useful in collecting data such as getting average price per trade.
 
 ### Trading 
 

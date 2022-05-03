@@ -57,23 +57,35 @@ data['sellToken'] = usdc
 
 link = ox + '/swap/v1/quote'
 
-try:
-    response = requests.get(link, data).json()
+result = requests.get(link, data).json()
 
-    tx = {}
-    tx['chainId'] = response['chainId']
-    tx['data'] = response['data']
-    tx['from'] = Web3.toChecksumAddress(response['from'])
-    tx['gas'] = int(response['gas'])
-    tx['maxFeePerGas'] = int(response['gasPrice'])
-    tx['maxPriorityFeePerGas'] = int(response['gasPrice'])
-    tx['nonce'] = w3.eth.getTransactionCount(me)
-    tx['to'] = Web3.toChecksumAddress(response['to'])
-    tx['type'] = '0x2'
-    tx['value'] = int(response['value'])
+tx = {}
+tx['chainId'] = result['chainId']
+tx['data'] = result['data']
+tx['from'] = Web3.toChecksumAddress(result['from'])
+tx['gas'] = int(result['gas'])
+tx['maxFeePerGas'] = int(result['gasPrice'])
+tx['maxPriorityFeePerGas'] = int(result['gasPrice'])
+tx['nonce'] = w3.eth.getTransactionCount(me)
+tx['to'] = Web3.toChecksumAddress(result['to'])
+tx['type'] = '0x2'
+tx['value'] = int(result['value'])
 
-    signed = w3.eth.account.sign_transaction(tx, key)
-    w3.eth.send_raw_transaction(signed.rawTransaction)
-    print(w3.toHex(w3.keccak(signed.rawTransaction)))
-except Exception as e:
-    print(e)
+signed = w3.eth.account.sign_transaction(tx, key)
+w3.eth.send_raw_transaction(signed.rawTransaction)
+hash = w3.toHex(w3.keccak(signed.rawTransaction))
+
+if os.getenv('OXTRADE_SUCCESS'):
+    data = {}
+    data['buy'] = token
+    data['sell'] = usdc
+    data['price'] = float(result['price'])
+    data['amount'] = float(sys.argv[2])
+    data['value'] = '{0:.18f}'.format(data['price'] * 10**-2)
+    data['chain'] = int(result['chainId'])
+    data['price'] = data['amount'] / float(data['value'])
+    data['hash'] = hash
+
+    link = os.getenv('OXTRADE_SUCCESS')
+
+    requests.post(link, data)
