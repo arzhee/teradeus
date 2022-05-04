@@ -9,6 +9,8 @@ ox = 'https://polygon.api.0x.org'
 rpc = 'https://polygon-rpc.com'
 
 path = os.path.dirname(os.path.abspath(__file__))
+file = path + '/erc20.json'
+abi = json.loads(open(file, 'r').read())
 
 w3 = Web3(Web3.HTTPProvider(rpc))
 
@@ -23,8 +25,6 @@ usdc = Web3.toChecksumAddress(usdc)
 if len(sys.argv[1:]) == 3:
     usdc = Web3.toChecksumAddress(sys.argv[3])
 
-path = os.path.dirname(os.path.abspath(__file__))
-
 tokens = {}
 tokens['WBTC'] = '0x1bfd67037b42cf73acf2047067bd4f2c47d9bfd6'
 tokens['WETH'] = '0x7ceb23fd6bc0add59e62ac25578270cff1b9f619'
@@ -37,11 +37,9 @@ if sys.argv[1] in tokens:
 else:
     token = Web3.toChecksumAddress(sys.argv[1])
 
-file = path + '/erc20.json'
-abi = json.loads(open(file, 'r').read())
-usd = w3.eth.contract(address = usdc, abi = abi)
-num = usd.functions.decimals().call()
-total = usd.functions.balanceOf(me).call()
+sell = w3.eth.contract(address = usdc, abi = abi)
+num = sell.functions.decimals().call()
+total = sell.functions.balanceOf(me).call()
 amount = int(float(sys.argv[2]) * 10**num)
 
 if total < amount:
@@ -56,7 +54,6 @@ data['sellAmount'] = amount
 data['sellToken'] = usdc
 
 link = ox + '/swap/v1/quote'
-
 result = requests.get(link, data).json()
 
 tx = {}
@@ -75,15 +72,19 @@ signed = w3.eth.account.sign_transaction(tx, key)
 w3.eth.send_raw_transaction(signed.rawTransaction)
 hash = w3.toHex(w3.keccak(signed.rawTransaction))
 
+buy = w3.eth.contract(address = token, abi = abi)
+num = buy.functions.decimals().call()
+buy = int(result['buyAmount'])
+value = float(buy * 10**(num * -1))
+
 if os.getenv('OXTRADE_SUCCESS'):
     data = {}
     data['buy'] = token
     data['sell'] = usdc
-    data['price'] = float(result['price'])
     data['amount'] = float(sys.argv[2])
-    data['value'] = '{0:.18f}'.format(data['price'] * 10**-2)
+    data['value'] = '{0:.18f}'.format(value)
     data['chain'] = int(result['chainId'])
-    data['price'] = data['amount'] / float(data['value'])
+    data['price'] = data['amount'] / value
     data['hash'] = hash
 
     link = os.getenv('OXTRADE_SUCCESS')
