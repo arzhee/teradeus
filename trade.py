@@ -26,12 +26,13 @@ if len(sys.argv[1:]) == 3:
     usdc = Web3.toChecksumAddress(sys.argv[3])
 
 tokens = {}
+tokens['KLIMA'] = '0x4e78011Ce80ee02d2c3e649Fb657E45898257815'
+tokens['QI'] = '0x580A84C73811E1839F75d86d75d88cCa0c241fF4'
+tokens['stMATIC'] = '0x3a58a54c066fdc0f2d55fc9c89f0415c92ebf3c4'
+tokens['TETU'] = '0x255707B70BF90aa112006E1b07B9AeA6De021424'
 tokens['WBTC'] = '0x1BFD67037B42Cf73acF2047067bd4F2C47D9BfD6'
 tokens['WETH'] = '0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619'
 tokens['WMATIC'] = '0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270'
-tokens['QI'] = '0x580A84C73811E1839F75d86d75d88cCa0c241fF4'
-tokens['TETU'] = '0x255707B70BF90aa112006E1b07B9AeA6De021424'
-tokens['KLIMA'] = '0x4e78011Ce80ee02d2c3e649Fb657E45898257815'
 
 if sys.argv[1] in tokens:
     token = Web3.toChecksumAddress(tokens[sys.argv[1]])
