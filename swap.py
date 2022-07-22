@@ -37,23 +37,15 @@ teradeus.buy(sys.argv[1])
 teradeus.sell(sellToken)
 teradeus.amount(sys.argv[2])
 
-def swap():
-    try:
-        result = teradeus.execute(api)
+try:
+    result = teradeus.execute(api)
 
-        print('[PASS]', 'Swap submitted!')
-        print('[PASS]', 'Hash:', result['hash'])
+    print('[PASS]', 'Swap submitted!')
+    print('[PASS]', 'Hash:', result['hash'])
+except Exception as e:
+    print('[FAIL]', e)
 
-        return result
-    except Exception as e:
-        print('[FAIL]', e)
-        print('[INFO]', 'Trying again after 10 seconds...')
-
-        time.sleep(10)
-
-        return swap()
-
-result = swap()
+    sys.exit()
 
 if os.getenv('TERADEUS_SUCCESS'):
     link = os.getenv('TERADEUS_SUCCESS')
