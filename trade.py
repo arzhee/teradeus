@@ -15,8 +15,8 @@ abi = json.loads(open(file, 'r').read())
 w3 = Web3(Web3.HTTPProvider(rpc))
 
 load_dotenv(dotenv_path = path + '/.env')
-me = os.getenv('OXTRADE_ADDRESS')
-key = os.getenv('OXTRADE_PRIVATE')
+me = os.getenv('TERADEUS_ADDRESS')
+key = os.getenv('TERADEUS_PRIVATE')
 me = Web3.toChecksumAddress(me)
 
 usdc = '0x2791bca1f2de4661ed88a30c99a7a9449aa84174'
@@ -26,11 +26,12 @@ if len(sys.argv[1:]) == 3:
     usdc = Web3.toChecksumAddress(sys.argv[3])
 
 tokens = {}
-tokens['WBTC'] = '0x1bfd67037b42cf73acf2047067bd4f2c47d9bfd6'
-tokens['WETH'] = '0x7ceb23fd6bc0add59e62ac25578270cff1b9f619'
-tokens['WMATIC'] = '0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270'
-tokens['QI'] = '0x580a84c73811e1839f75d86d75d88cca0c241ff4'
+tokens['WBTC'] = '0x1BFD67037B42Cf73acF2047067bd4F2C47D9BfD6'
+tokens['WETH'] = '0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619'
+tokens['WMATIC'] = '0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270'
+tokens['QI'] = '0x580A84C73811E1839F75d86d75d88cCa0c241fF4'
 tokens['TETU'] = '0x255707B70BF90aa112006E1b07B9AeA6De021424'
+tokens['KLIMA'] = '0x4e78011Ce80ee02d2c3e649Fb657E45898257815'
 
 if sys.argv[1] in tokens:
     token = Web3.toChecksumAddress(tokens[sys.argv[1]])
@@ -77,7 +78,7 @@ num = buy.functions.decimals().call()
 buy = int(result['buyAmount'])
 value = float(buy * 10**(num * -1))
 
-if os.getenv('OXTRADE_SUCCESS'):
+if os.getenv('TERADEUS_SUCCESS'):
     data = {}
     data['buy'] = token
     data['sell'] = usdc
@@ -87,6 +88,6 @@ if os.getenv('OXTRADE_SUCCESS'):
     data['price'] = data['amount'] / value
     data['hash'] = hash
 
-    link = os.getenv('OXTRADE_SUCCESS')
+    link = os.getenv('TERADEUS_SUCCESS')
 
     requests.post(link, data)
