@@ -53,7 +53,10 @@ def swap():
 
 result = swap()
 
-if os.getenv('OXTRADE_SUCCESS'):
-    link = os.getenv('OXTRADE_SUCCESS')
+if os.getenv('TERADEUS_SUCCESS'):
+    link = os.getenv('TERADEUS_SUCCESS')
+
+    if debug:
+        print('[INFO]', 'Sending data to', link + '...')
 
     requests.post(link, result)

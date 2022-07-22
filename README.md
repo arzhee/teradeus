@@ -37,7 +37,7 @@ Wherein the `TERADEUS_ADDRESS` is the wallet address that will perform transacti
 
 For `TERADEUS_SUCCESS`, it is an URL wherein Teradeus can pass data (e.g, `price`, `amount`, `value`) after the transaction is put to the network. It can be useful in collecting data such as getting average price per trade.
 
-The `TERADEUS_API` specifies the implementation to be used when swapping assets. By default it uses the [0x Swap API](https://docs.0x.org/0x-api-swap/api-references) (`0XAPI`) but a [1inch Swap API](https://docs.1inch.io/docs/aggregation-protocol/introduction) implementation is also available (`1INCH`).
+The `TERADEUS_API` specifies the implementation to be used when swapping assets. By default it uses the [0x Swap API](https://docs.0x.org/0x-api-swap/api-references) (`0XAPI`) but a [1inch Swap API](https://docs.1inch.io/docs/aggregation-protocol/introduction) implementation is also available (`1INCH`). Kindly update as well the variables that are specific to the swap implementation for the chosen API (`OXAPI_URL` for `0XAPI` while `INCH_URL` and `INCH_CHAIN` for `1INCH`).
 
 To specify a default token to sell, update the `TERADEUS_SELLTOKEN` variable. If not specified or empty, it will use the contract address of [USD Coin (PoS)](https://polygonscan.com/token/0x2791bca1f2de4661ed88a30c99a7a9449aa84174) by default.
 
