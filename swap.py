@@ -7,7 +7,9 @@ import requests
 import sys
 import time
 
-load_dotenv(dotenv_path = '.env')
+path = os.path.dirname(os.path.abspath(__file__))
+
+load_dotenv(dotenv_path = path + '/.env')
 
 debug = os.getenv('TERADEUS_DEBUG') == 'true'
 
@@ -18,7 +20,7 @@ if os.getenv('TERADEUS_API') == '1INCH':
 
     api = OneInch(os.getenv('INCH_URL'), chain, debug)
 
-teradeus = Teradeus(os.getenv('TERADEUS_RPC'), debug)
+teradeus = Teradeus(os.getenv('TERADEUS_RPC'), path, debug)
 
 sellToken = 'USDC'
 
