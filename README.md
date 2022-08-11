@@ -50,3 +50,18 @@ $ python swap.py [BUY_TOKEN] [AMOUNT] (SELL_TOKEN)
 ```
 
 The code above will sell a certain amount (`[AMOUNT]`) of the specified `(SELL_TOKEN)` in order to buy the desired `[BUY_TOKEN]`. Putting `(SELL_TOKEN)` is optional, as the default value of `(SELL_TOKEN)` when not included is the contract address specified in the `TERADEUS_SELLTOKEN` variable in the `.env` file.
+
+### Using Docker
+
+Teradeus is also available as a Docker container. With this, [Docker](https://www.docker.com/) is required with its tool [Docker Compose](https://docs.docker.com/compose/). To install, kindly build first the `Dockerfile` prior running the Docker Compose instance:
+
+``` bash
+$ docker-compose build
+$ docker-compose up -d
+```
+
+After running Docker Compose, perform the swap using `docker exec`:
+
+``` bash
+docker exec -it teradeus python swap.py WMATIC 0.01
+```

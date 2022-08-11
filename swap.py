@@ -1,6 +1,6 @@
+from apis.inch import OneInch
+from apis.oxapi import OxApi
 from dotenv import load_dotenv
-from inch import OneInch
-from oxapi import OxApi
 from teradeus import Teradeus
 import os
 import requests

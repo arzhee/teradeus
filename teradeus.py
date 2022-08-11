@@ -3,12 +3,12 @@ import json
 
 class Teradeus:
     def __init__(self, rpc, path, debug = False):
-        file = open(path + '/erc20.json', 'r')
+        file = open(path + '/json/erc20.json', 'r')
         self.abi = json.loads(file.read())
 
         self.debug = debug
 
-        file = open(path + '/tokens.json', 'r')
+        file = open(path + '/json/tokens.json', 'r')
         self.tokens = json.loads(file.read())
 
         self.w3 = Web3(Web3.HTTPProvider(rpc))

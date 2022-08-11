@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  teradeus:
+    build: ./
+    container_name: teradeus
+    restart: always
+    stdin_open: true
+    tty: true 
+    volumes:
+      - ./../:/home
