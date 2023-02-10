@@ -65,7 +65,7 @@ class Pswap:
             link = self.url + '/transactions/' + self.chain
 
             if self.debug:
-                print('[INFO]', 'Creating tx [', link + ']...')
+                print('[INFO]', 'Creating tx (' + link + ')...')
 
                 print('[INFO]', 'Data:')
 
