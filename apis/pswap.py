@@ -36,14 +36,13 @@ class Pswap:
         data['amount'] = self.sellAmount
         data['userAddress'] = str(self.me)
         data['network'] = int(self.chain)
-        data['maxImpact'] = 1
 
         try:
             # Get first a price from the /price endpoint --------
             link = self.url + '/prices'
 
             if self.debug:
-                print('[INFO]', 'Getting price [', link + ']...')
+                print('[INFO]', 'Getting price (' + link + ')...')
 
                 print('[INFO]', 'Data:')
 

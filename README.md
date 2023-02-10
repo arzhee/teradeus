@@ -1,6 +1,6 @@
 # Teradeus
 
-Trade cryptocurrencies using [0x Swap API](https://docs.0x.org/0x-api-swap/api-references) or [1inch Swap API](https://docs.1inch.io/docs/aggregation-protocol/introduction).
+Trade cryptocurrencies using [0x Swap API](https://docs.0x.org/0x-api-swap/api-references), [1inch Swap API](https://docs.1inch.io/docs/aggregation-protocol/introduction), or [Paraswap API](https://developers.paraswap.network/api/master).
 
 ## Installation
 
