@@ -19,6 +19,11 @@ class OxApi:
         self.buyToken = token
 
         return self
+    
+    def buyDecimals(self, decimals):
+        self.buyDecimals = decimals
+
+        return self
 
     def generate(self):
         data = {}
@@ -66,6 +71,11 @@ class OxApi:
 
     def sell(self, token):
         self.sellToken = token
+
+        return self
+    
+    def sellDecimals(self, decimals):
+        self.sellDecimals = decimals
 
         return self
 

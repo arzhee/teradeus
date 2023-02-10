@@ -29,6 +29,9 @@ INCH_URL=https://api.1inch.io/v4.0
 INCH_CHAIN=137
 
 OXAPI_URL=https://polygon.api.0x.org
+
+PSWAP_URL=https://apiv5.paraswap.io
+PSWAP_CHAIN=137
 ```
 
 Wherein the `TERADEUS_ADDRESS` is the wallet address that will perform transactions and the `TERADEUS_PRIVATE` is the exported private key. To know on how to export a wallet's private key through Metamask, kindly check this [link](https://metamask.zendesk.com/hc/en-us/articles/360015289632-How-to-Export-an-Account-Private-Key).
@@ -37,7 +40,13 @@ Wherein the `TERADEUS_ADDRESS` is the wallet address that will perform transacti
 
 For `TERADEUS_SUCCESS`, it is an URL wherein Teradeus can pass data (e.g, `price`, `amount`, `value`) after the transaction is put to the network. It can be useful in collecting data such as getting average price per trade.
 
-The `TERADEUS_API` specifies the implementation to be used when swapping assets. By default it uses the [0x Swap API](https://docs.0x.org/0x-api-swap/api-references) (`0XAPI`) but a [1inch Swap API](https://docs.1inch.io/docs/aggregation-protocol/introduction) implementation is also available (`1INCH`). Kindly update as well the variables that are specific to the swap implementation for the chosen API (`OXAPI_URL` for `0XAPI` while `INCH_URL` and `INCH_CHAIN` for `1INCH`).
+The `TERADEUS_API` specifies the implementation to be used when swapping assets. By default it uses the [0x Swap API](https://docs.0x.org/0x-api-swap/api-references) but an implemention for [1inch Swap API](https://docs.1inch.io/docs/aggregation-protocol/introduction) and [Paraswap API](https://developers.paraswap.network/api/master) are also available. Kindly update as well the following variables that are specific to the swap implementation for the chosen API:
+
+* [0x Swap API](https://docs.0x.org/0x-api-swap/api-references) (`0XAPI`) - uses the `OXAPI_URL` variable only
+
+* [1inch Swap API](https://docs.1inch.io/docs/aggregation-protocol/introduction) - uses `INCH_URL` and `INCH_CHAIN` variables
+
+* [Paraswap API](https://developers.paraswap.network/api/master) - uses `PSWAP_URL` and `PSWAP_CHAIN` variables
 
 To specify a default token to sell, update the `TERADEUS_SELLTOKEN` variable. If not specified or empty, it will use the contract address of [USD Coin (PoS)](https://polygonscan.com/token/0x2791bca1f2de4661ed88a30c99a7a9449aa84174) by default.
 
@@ -46,10 +55,10 @@ For debugging purposes, the `TERADEUS_DEBUG` can be enabled to display JSON dump
 ### Trading 
 
 ```
-$ python swap.py [BUY_TOKEN] [AMOUNT] (SELL_TOKEN)
+$ python swap.py [BUY_TOKEN] [AMOUNT] (SELL_TOKEN) (API)
 ```
 
-The code above will sell a certain amount (`[AMOUNT]`) of the specified `(SELL_TOKEN)` in order to buy the desired `[BUY_TOKEN]`. Putting `(SELL_TOKEN)` is optional, as the default value of `(SELL_TOKEN)` when not included is the contract address specified in the `TERADEUS_SELLTOKEN` variable in the `.env` file.
+The code above will sell a certain amount (`[AMOUNT]`) of the specified `(SELL_TOKEN)` in order to buy the desired `[BUY_TOKEN]`. Putting `(SELL_TOKEN)` is optional, as the default value of `(SELL_TOKEN)` when not included is the contract address specified in the `TERADEUS_SELLTOKEN` variable in the `.env` file. `(API)` is also optional and its default value will be based from the `TERADEUS_API` variable.
 
 ### Using Docker
 

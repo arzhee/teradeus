@@ -48,8 +48,10 @@ class Teradeus:
 
         api.wallet(str(self.me))
         api.buy(self.buyToken)
+        api.buyDecimals(self.__decimal__(self.buyToken))
         api.amount(self.sellAmount)
         api.sell(self.sellToken)
+        api.sellDecimals(self.__decimal__(self.sellToken))
 
         result = api.generate()
 
